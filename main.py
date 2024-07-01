@@ -1,6 +1,18 @@
 import google.generativeai as genai
 from apigemini import API_KEY
-from data import user_name, name, region, relation, language
+from tkinter import *
+from tkinter import simpledialog
+
+window = Tk()
+window.withdraw()
+
+user_name = simpledialog.askstring("Input", 'Your Name: ')
+name = simpledialog.askstring("Input", 'Persons name: ')
+language = simpledialog.askstring("Input", 'Language you want to use: ')
+region = simpledialog.askstring("Input", 'Where the person from: ')
+relation = simpledialog.askstring("Input", 'Relation with you: ')
+
+window.destroy()
 
 genai.configure(api_key=API_KEY)
 
@@ -28,7 +40,7 @@ chat_session = model.start_chat(
     {
       "role": "model",
       "parts": [
-        "Hey Anish!  😊 What's up? \n",
+        "Hey! 😊 What's up? \n",
       ],
     },
   ]
@@ -40,7 +52,7 @@ def chatting(chat):
 
 if __name__ == '__main__':
   user_name = input('Your name: ')
-  name = input('Persons name: ')  
+  name = input('Persons name: ')
   region = input('Where are you form: ')
   language = input('Language you want to use: ')
   relation = input('Relation: ')
