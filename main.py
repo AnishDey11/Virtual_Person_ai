@@ -1,7 +1,6 @@
-from tkinter import *
 import google.generativeai as genai
-import os
-from apigemini import API_KEY # API_KEY should be loaded in apigemini.py file
+from apigemini import API_KEY
+from data import user_name, name, region, relation, language
 
 genai.configure(api_key=API_KEY)
 
@@ -23,7 +22,7 @@ chat_session = model.start_chat(
     {
       "role": "user",
       "parts": [
-        "You have to act like my girlfriend named Suridhi Chaudhuri,you are a bengali , you know bengali, english, hindi , by the way my name is Anish Dey, you need act like cute and funny or some times may be angry. Chat like normal human make responses small.",
+        f"You have to act like a person named {name}, you are my {relation}, you are from {region}, you know {language}, by the way my name is {user_name}, you need to act like the person and chat like normal human make responses small.",
       ],
     },
     {
@@ -35,11 +34,20 @@ chat_session = model.start_chat(
   ]
 )
 
-while True:
-    chat = input("<<< ")
-
+def chatting(chat):
     response = chat_session.send_message(chat)
+    return response.text
 
-    print(response.text)
+if __name__ == '__main__':
+  user_name = input('Your name: ')
+  name = input('Persons name: ')  
+  region = input('Where are you form: ')
+  language = input('Language you want to use: ')
+  relation = input('Relation: ')
+
+  while True:
+    chat = input("<<< ")
+    response = chatting(chat)
+    print(response)
 
 
