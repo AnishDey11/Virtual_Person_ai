@@ -1,18 +1,74 @@
 import google.generativeai as genai
 from apigemini import API_KEY
 from tkinter import *
-from tkinter import simpledialog
 
-window = Tk()
-window.withdraw()
+name = ''
+user_name = ''
+region = ''
+language = ''
+relation = ''
 
-user_name = simpledialog.askstring("Input", 'Your Name: ')
-name = simpledialog.askstring("Input", 'Persons name: ')
-language = simpledialog.askstring("Input", 'Language you want to use: ')
-region = simpledialog.askstring("Input", 'Where the person from: ')
-relation = simpledialog.askstring("Input", 'Relation with you: ')
+def save_input():
+  global user_name, name, region, language, relation
+  user_name = entry_your_name.get()
+  name = entry_person_name.get()
+  region = entry_region.get()
+  language = entry_language.get()
+  relation = entry_relation.get()
 
-window.destroy()
+  # You can print or use these variables as needed
+  # print(f"Your Name: {your_name}")
+  # print(f"Person's Name: {person_name}")
+  # print(f"Region: {region}")
+  # print(f"Language: {language}")
+  # print(f"Relation: {relation}")
+
+  input_window.destroy()  # Close the input window
+
+
+# Create the input window
+input_window = Tk()
+input_window.geometry('400x300')
+input_window.title("Input Details")
+
+# Configure grid layout
+input_window.grid_columnconfigure(1, weight=1)
+
+# Your Name
+label_your_name = Label(input_window, text="Your Name:")
+label_your_name.grid(row=0, column=0, padx=10, pady=5, sticky=E)
+entry_your_name = Entry(input_window, width=30)
+entry_your_name.grid(row=0, column=1, padx=10, pady=5)
+
+# Person's Name
+label_person_name = Label(input_window, text="Person's Name:")
+label_person_name.grid(row=1, column=0, padx=10, pady=5, sticky=E)
+entry_person_name = Entry(input_window, width=30)
+entry_person_name.grid(row=1, column=1, padx=10, pady=5)
+
+# Region
+label_region = Label(input_window, text="Region:")
+label_region.grid(row=2, column=0, padx=10, pady=5, sticky=E)
+entry_region = Entry(input_window, width=30)
+entry_region.grid(row=2, column=1, padx=10, pady=5)
+
+# Language
+label_language = Label(input_window, text="Language:")
+label_language.grid(row=3, column=0, padx=10, pady=5, sticky=E)
+entry_language = Entry(input_window, width=30)
+entry_language.grid(row=3, column=1, padx=10, pady=5)
+
+# Relation
+label_relation = Label(input_window, text="Relation:")
+label_relation.grid(row=4, column=0, padx=10, pady=5, sticky=E)
+entry_relation = Entry(input_window, width=30)
+entry_relation.grid(row=4, column=1, padx=10, pady=5)
+
+# Submit Button
+submit_button = Button(input_window, text="Submit", command=save_input)
+submit_button.grid(row=5, columnspan=2, pady=20)
+
+input_window.mainloop()
 
 genai.configure(api_key=API_KEY)
 
