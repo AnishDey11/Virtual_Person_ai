@@ -1,1 +1,1 @@
-API_KEY = '' # Gemini API key must be enterd here.
+API_KEY = ' ' # Gemini API key must be enterd here.
